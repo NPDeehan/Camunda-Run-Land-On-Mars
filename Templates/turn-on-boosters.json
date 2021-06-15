@@ -1,0 +1,45 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.3.0/resources/schema.json",
+  "name": "Turn On Boosters",
+  "description": "This is a service which turns on the boosters",
+  "id": "84918e8d-ed2f-4da9-bf83-6d231dc08998",
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "external",
+      "binding": {
+        "type": "property",
+        "name": "camunda:type"
+      }
+    },
+    {
+      "type": "String",
+      "value": "TurnOnBoosters",
+      "editable": false,
+      "binding": {
+        "type": "property",
+        "name": "camunda:topic"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "Turn On Boosters",
+      "binding": {
+        "type": "property",
+        "name": "name"
+      }
+    },
+    {
+      "label": "boostersSuccessful",
+      "value": "boostersSuccessful",
+      "description": "If this variable is true - the boosters have turned on and are stable.",
+      "binding": {
+        "type": "camunda:outputParameter",
+        "source": "${boostersSuccessful}"
+      }
+    }
+  ]
+}

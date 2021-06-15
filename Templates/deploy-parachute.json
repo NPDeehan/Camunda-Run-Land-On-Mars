@@ -1,0 +1,88 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.3.0/resources/schema.json",
+  "name": "Deploy Parachute",
+  "description": "This will deploy a parachute on the probe heading to mars\n",
+  "id": "ad2749f9-8ff6-4e43-8947-8a0914df1f97",
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "external",
+      "binding": {
+        "type": "property",
+        "name": "camunda:type"
+      }
+    },
+    {
+      "type": "String",
+      "value": "DeployParachute",
+      "editable": false,
+      "binding": {
+        "type": "property",
+        "name": "camunda:topic"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "Deploy Parachute",
+      "binding": {
+        "type": "property",
+        "name": "name"
+      }
+    },
+    {
+      "label": "parachuteStatus",
+      "value": "parachuteStatus",
+      "description": "This will be true is the parachute has successfully deployed",
+      "binding": {
+        "type": "camunda:outputParameter",
+        "source": "${parachuteStatus}"
+      }
+    },
+    {
+      "label": "DEPLOY_FAIL",
+      "value": "#{!parachuteStatus}",
+      "binding": {
+        "type": "camunda:errorEventDefinition",
+        "errorRef": "53345358-2fbf-46a9-8fb4-cdeb0f050f26"
+      }
+    }
+  ],
+  "scopes": [
+    {
+      "type": "bpmn:Error",
+      "id": "53345358-2fbf-46a9-8fb4-cdeb0f050f26",
+      "properties": [
+        {
+          "label": "Error Code",
+          "type": "Hidden",
+          "value": "DEPLOY_FAIL",
+          "binding": {
+            "type": "property",
+            "name": "errorCode"
+          }
+        },
+        {
+          "label": "Error Message",
+          "type": "Hidden",
+          "value": "The Parachute has failed to open! We're doomed",
+          "binding": {
+            "type": "property",
+            "name": "camunda:errorMessage"
+          }
+        },
+        {
+          "label": "Error Name",
+          "type": "Hidden",
+          "value": "DEPLOY_FAIL",
+          "binding": {
+            "type": "property",
+            "name": "name"
+          }
+        }
+      ]
+    }
+  ]
+}

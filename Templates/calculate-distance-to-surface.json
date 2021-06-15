@@ -1,0 +1,54 @@
+{
+  "$schema": "https://unpkg.com/@camunda/element-templates-json-schema@0.3.0/resources/schema.json",
+  "name": "Calculate Distance To Surface",
+  "description": "This is a service which helps work out how close you are to the surface of Mars",
+  "id": "aaf398e7-4fee-4c2b-9aa8-c3e948df15e5",
+  "appliesTo": [
+    "bpmn:ServiceTask"
+  ],
+  "properties": [
+    {
+      "type": "Hidden",
+      "value": "external",
+      "binding": {
+        "type": "property",
+        "name": "camunda:type"
+      }
+    },
+    {
+      "type": "String",
+      "value": "CalculateDistanceToSurface",
+      "editable": false,
+      "binding": {
+        "type": "property",
+        "name": "camunda:topic"
+      }
+    },
+    {
+      "type": "Hidden",
+      "value": "Calculate Distance To Surface",
+      "binding": {
+        "type": "property",
+        "name": "name"
+      }
+    },
+    {
+      "label": "lastKnownDistance",
+      "value": "${lastKnownDistance}",
+      "description": "What is the last know distance to the surface?",
+      "binding": {
+        "type": "camunda:inputParameter",
+        "name": "lastKnownDistance"
+      }
+    },
+    {
+      "label": "lastKnownDistance",
+      "value": "lastKnownDistance",
+      "description": "This is the distance to the surface",
+      "binding": {
+        "type": "camunda:outputParameter",
+        "source": "${lastKnownDistance}"
+      }
+    }
+  ]
+}
