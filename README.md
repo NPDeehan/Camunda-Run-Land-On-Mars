@@ -12,9 +12,9 @@ This is an example of how you can run quite a complex process with advanced BPMN
 ## What you will do
 
 You'll built this process.
-![processmars](./ProcessModel/MarsProcessComplete.png)
+![processmars](./ProcessModel/MarsProcessComplete.gif)
 
-Use JavaScript External Task workers. 
+Use JavaScript External Task workers to complete service tasks! 
 ```JavaScript
 const { Client, logger } = require("camunda-external-task-client-js");
 const { Variables } = require("camunda-external-task-client-js");
@@ -73,4 +73,55 @@ With Camunda Modeler Templates
 ```
 
 
-## How To @TODO
+## Add Templates to the Modeler
+
+There are 3 template files quite conveniently located in the folder called `Templates`. Copy these files to the Camunda modeler by either
+finding or creating the `resources/element-templates` folder, relative to the modelers executable or relative to the modelers data directory (see below). Alternatively, they can be stored in a .camunda/element-templates directory that resides, relative to the currently opened diagram, anywhere in the diagrams path hierarchy
+
+You'll know it's worked if you can select a service task and then be able to see the `Open Catalog` button.
+
+![templates](./images/templates.png)
+
+More information on modeler templates can be [found here](https://github.com/camunda/camunda-modeler/tree/develop/docs/element-templates#configuring-templates). 
+
+## Deploy the model
+
+In keeping with the theme of putting things in the folders that they belong it, I've put the process model into a folder called `ProcessModel` - To deploy you just need to make sure that you've started up the Camunda Engine and then simply open the model in the Camunda Modeler and clicking the deploy button to deploy it. 
+![deployButton](./images/deployButton.png)
+![deployScreen](./images/deployScreen.png)
+
+## Run the workers
+
+Workers in Camunda can be written in a number of different languages, in this example i'm using JavaScript. It's pretty easy to start them up. Go to the `MarsWorkersJS` directory open up a terminal window and run the following command to install the dependencies. 
+```
+npm install -s camunda-external-task-client-js
+```
+Then for each worker you can run
+```
+node .\CalculateDistanceToSurface.js
+```
+```
+node .\DeployParachute.js
+```
+```
+node .\TurnOnBoostersWorker.js
+```
+You'll know it's running correctly when you see this in the console for each worker.
+```
+✓ subscribed to topic CalculateDistanceToSurface
+```
+
+## Open Camunda Webapps
+
+You can now access the Camunda webapps by going to the following URL
+``http://localhost:8080/camunda/app/welcome/default``. 
+By default the username and password is `demo/demo`
+
+You can start the process instance by going to the tasklist webbapp and clicking Start Process in the top right and selecting the mars process. 
+
+You can view the process status by navigating to cockpit or following this link:
+``localhost:8080/camunda/app/cockpit/default/#/processes`` 
+
+Have fun!
+
+
